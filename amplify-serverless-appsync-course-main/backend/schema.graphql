@@ -1,10 +1,15 @@
 schema {
     query: Query,
     mutation: Mutation
+    subscription: Subscription
+}
+
+type Subscription {
+    onCreateBook: Book @aws_subscribe(mutations: ["createBook])
 }
 
 type Query {
-    getBookById(bookId: ID!): Book! @aws_iam
+    getBookById(bookId: ID!): Book! @aws_iam @aws_cognito_user_pools
     listBooks(limit: Int!, nextToken: String): BooksPage!
     myOrders(limit: Int!, nextToken: String): orderItemsPage!
 }

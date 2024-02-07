@@ -1,22 +1,42 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { API, graphqlOperation } from 'aws-amplify';
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+import { withAuthenticator, AmplifySignOut, AmplifyToast } from '@aws-amplify/ui-react';
 import { getBookById } from "./graphql/queries/book";
-import './App.css';
+import { onCreateBook } from "./graphql/subscription/book";
+
+
+
+import "./App.css" ;
+
+
 
 function App() {
 
   const [book, setBook] = useState(null);
 
+  useEffect (() => {
+    const subscription = API.graphql(graphqlOperation(onCreateBook)).subscribe({
+      next: (result) => {
+        console.log(result);
+        
+
+      }
+    }
+
+    )
+  }
+
+  )
+
   const getBook = async () => {
     // make a call to appsync api
-    // const book = await API.graphql(graphqlOperation(getBookById, { id: "97d97d2d-87b6-4e81-97da-8a63a1f8ae9f" }));
+    const book = await API.graphql(graphqlOperation(getBookById, { id: "1b62c03f-a976-49b8-abed-99c0847d555e" }));
 
-    const book = await API.graphql({
-      query: getBookById,
-      variables: { id: "6119cec8-b558-4493-bf4d-e2056f2b818b" },
-      authMode: 'AWS_IAM'
-    });
+   // const book = await API.graphql({
+     // query: getBookById,
+     // variables: { id: "6119cec8-b558-4493-bf4d-e2056f2b818b" },
+      //authMode: 'AWS_IAM'
+   // });
 
     setBook(book.data.getBookById);
   }
@@ -34,7 +54,8 @@ function App() {
 
   return (
     <div>
-      {/* <AmplifySignOut /> */}
+      <h1> BOOK STORE V1 </h1>
+      {<AmplifySignOut /> }
       <section className="book-section">
         <button onClick={() => getBook()}>Get book details</button>
         <hr />
@@ -44,4 +65,4 @@ function App() {
   );
 }
 
-export default App;
+export default  withAuthenticator(App)
