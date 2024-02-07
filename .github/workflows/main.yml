@@ -1,16 +1,19 @@
 ##workflowfile
 name: Bookstore App
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+
 on:
   push:
     branches:
       - "main"
+
 jobs:
-  Explore-GitHub-Actions:
+  build:
     runs-on: ubuntu-latest
+
     strategy:
-    matrix:
-      node-version: [12.x]
+      matrix:
+        node-version: [12.x]
+    
     steps:
       - uses: actions/checkout@v4
       - run: npm install
