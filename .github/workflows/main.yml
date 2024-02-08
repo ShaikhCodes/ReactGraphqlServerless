@@ -13,6 +13,11 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
+    - name: Print Current Directory Contents
+      run: ls -l
+    
+      
+
     - name: Use Node.js 12.x
       uses: actions/setup-node@v2
       with:
@@ -23,6 +28,9 @@ jobs:
 
     - name: Build Production App
       run: npm run build
+
+    - name: Print Build Directory Contents
+      run: ls -l build
   deploy:
     name: Deploy to S3
     runs-on: ubuntu-latest
@@ -32,6 +40,9 @@ jobs:
       uses: jakejarvis/s3-sync-action@master
       with:
         args: --acl public-read --follow-symlinks --delete
+    - name: Print SOURCE_DIR Contents
+      run: ls -l $SOURCE_DIR
+      
       env:
         AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
