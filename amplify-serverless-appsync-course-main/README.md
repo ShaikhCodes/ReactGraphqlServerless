@@ -1,1 +1,0 @@
-# amplify-serverless-appsync-course
