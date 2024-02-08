@@ -1,6 +1,6 @@
 import React, { useState , useEffect } from "react";
 import { API, graphqlOperation } from 'aws-amplify';
-import { withAuthenticator, AmplifySignOut, AmplifyToast } from '@aws-amplify/ui-react';
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { getBookById } from "./graphql/queries/book";
 import { onCreateBook } from "./graphql/subscription/book";
 
@@ -14,19 +14,7 @@ function App() {
 
   const [book, setBook] = useState(null);
 
-  useEffect (() => {
-    const subscription = API.graphql(graphqlOperation(onCreateBook)).subscribe({
-      next: (result) => {
-        console.log(result);
-        
-
-      }
-    }
-
-    )
-  }
-
-  )
+  
 
   const getBook = async () => {
     // make a call to appsync api
