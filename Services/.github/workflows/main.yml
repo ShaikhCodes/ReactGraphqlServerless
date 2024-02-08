@@ -1,7 +1,7 @@
 name: Docker build and Push to ECR
 on: 
   push: 
-    branches: [ "master" ]
+    branches: [ "main" ]
   
 jobs:
   React-Test:
