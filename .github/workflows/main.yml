@@ -33,7 +33,7 @@ jobs:
       run: ls -l build
 
     - name: Print Environment Variables
-      run: echo "AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}"
+      run: echo "AWS_S3_BUCKET: ${{ s3secrets.AWS_S3_BUCKET }}"
   deploy:
     name: Deploy to S3
     runs-on: ubuntu-latest
@@ -47,8 +47,8 @@ jobs:
       run: ls -l $SOURCE_DIR
       
       env:
-        AWS_S3_BUCKET: 'www.bookstore.com'
-        AWS_ACCESS_KEY_ID: 'AKIAXOUEIW5WK2ODOJNT'
-        AWS_SECRET_ACCESS_KEY: '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'
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
         SOURCE_DIR: 'build'
