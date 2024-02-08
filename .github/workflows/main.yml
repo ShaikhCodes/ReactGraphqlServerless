@@ -32,6 +32,12 @@ jobs:
     - name: Print Build Directory Contents
       run: ls -l build
 
+    - name: Archive Production Build
+      uses: actions/upload-artifact@v2
+      with:
+        name: production-build
+        path: build/
+
     
   deploy:
     name: Deploy to S3
