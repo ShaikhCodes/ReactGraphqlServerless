@@ -45,8 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-    - name: Print SOURCE_DIR Contents
-      run: ls -l build
+    
     - name: Upload to S3
       uses: jakejarvis/s3-sync-action@master
       with:
