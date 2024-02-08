@@ -25,6 +25,6 @@ jobs:
 
       - name: Build, Tag, and Push Docker Image to Amazon ECR
         run: |
-          docker build -t graphql .
-          docker tag my-docker-image ${{ steps.login-ecr.outputs.registry }}:latest
+          docker build -t graphqlapi .
+          docker tag graphqlapi ${{ steps.login-ecr.outputs.registry }}:latest
           docker push ${{ steps.login-ecr.outputs.registry }}:latest
