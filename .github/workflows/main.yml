@@ -32,8 +32,7 @@ jobs:
     - name: Print Build Directory Contents
       run: ls -l build
 
-    - name: Print Environment Variables
-      run: echo "AWS_S3_BUCKET: ${{ s3secrets.AWS_S3_BUCKET }}"
+    
   deploy:
     name: Deploy to S3
     runs-on: ubuntu-latest
