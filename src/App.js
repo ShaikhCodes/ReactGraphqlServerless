@@ -18,7 +18,7 @@ function App() {
 
   const getBook = async () => {
     // make a call to appsync api
-    const book = await API.graphql(graphqlOperation(getBookById, { id: "1b62c03f-a976-49b8-abed-99c0847d555e" }));
+    const book = await API.graphql(graphqlOperation(getBookById, { id: "8102c76c-fcfc-4e84-b544-cec4cfcf8f5c" }));
 
    // const book = await API.graphql({
      // query: getBookById,
